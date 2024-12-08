@@ -1,11 +1,10 @@
 package com.enigma.carrent.entity;
 import java.time.LocalDate;
-import java.util.Date;
-
 import org.springframework.data.annotation.CreatedDate;
 
 import com.enigma.carrent.constant.Constant;
 import com.enigma.carrent.constant.RentTransactionStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,9 +40,9 @@ public class RentTransaction {
     private Car car_id;
 
     @Column(name = "rental_start_date", nullable = false)
-    private Date rental_start_date;
+    private LocalDate rental_start_date;
     @Column(name = "rental_end_date", nullable = false)
-    private Date rental_end_date;
+    private LocalDate rental_end_date;
 
     @Column(name = "total_price", nullable = false)
     private Long total_price;

@@ -1,17 +1,15 @@
 package com.enigma.carrent.dto.request;
 
 import com.enigma.carrent.constant.RentTransactionStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class RentStatusUpdate {
-    private RentTransactionStatus status;
+@Builder
+public class UpdateTransactionStatusRequest {
+    private RentTransactionStatus transactionStatus;
 }

@@ -1,7 +1,6 @@
 package com.enigma.carrent.dto.request;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import com.enigma.carrent.constant.RentTransactionStatus;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +17,8 @@ import lombok.Setter;
 public class RentTransactionRequest {
     private String nik;
     private String carId;
-    private Date rentalStartDate;
-    private Date rentalEndDate;
+    private LocalDate rentalStartDate;
+    private LocalDate rentalEndDate;
     private Long totalPrice;
     private RentTransactionStatus status;
 }

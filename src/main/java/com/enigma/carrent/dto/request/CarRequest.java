@@ -17,4 +17,5 @@ public class CarRequest {
     private String name;
     private String brand;
     private String model;
+    private Long price;
 }

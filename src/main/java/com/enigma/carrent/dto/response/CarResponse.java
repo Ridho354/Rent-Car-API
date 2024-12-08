@@ -17,5 +17,6 @@ public class CarResponse {
     private String name;
     private String brand;
     private String model;
+    private Long price;
     private CarStatus status;
 }

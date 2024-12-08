@@ -39,6 +39,9 @@ public class Car {
     @Column(name = "model")
     private String model;
 
+    @Column(name = "price", nullable = false)
+    private Long price;
+
     @Column(name = "status", nullable = false)
     private CarStatus status;
 }

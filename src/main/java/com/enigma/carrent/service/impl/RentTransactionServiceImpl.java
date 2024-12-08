@@ -15,6 +15,7 @@ import com.enigma.carrent.service.RentTransactionService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
+
 import com.enigma.carrent.entity.Customer;
 import com.enigma.carrent.entity.Car;
 
@@ -37,6 +38,9 @@ public class RentTransactionServiceImpl implements RentTransactionService {
         if (customer == null || car == null) {
             return null;
         }
+        if(car.getStatus() != CarStatus.AVAILABLE) {
+            return null;
+        }
         
         RentTransaction rentTransaction = RentTransaction.builder()
                 .nik(customer)
@@ -50,7 +54,7 @@ public class RentTransactionServiceImpl implements RentTransactionService {
                 .build();
         rentTransactionRepository.saveAndFlush(rentTransaction);
 
-        Car selectCar = carService.findById(request.getCarId());
+        // Car selectCar = carService.findById(request.getCarId());
         CarStatusUpdate selectStatus = CarStatusUpdate.builder()
                 .status(CarStatus.RENTED)
                 .build();
@@ -121,22 +125,27 @@ public class RentTransactionServiceImpl implements RentTransactionService {
 
     @Override
     public RentTransactionResponse updateStatus(String id, RentStatusUpdate rentStatusUpdate) {
-        RentTransactionStatus status = rentStatusUpdate.getStatus();
         RentTransaction rentTransaction = rentTransactionRepository.findById(id).orElse(null);
         if (rentTransaction != null) {
-            rentTransaction.setStatus(status);
+            RentStatusUpdate statusUpdate = RentStatusUpdate.builder().status(rentStatusUpdate.getStatus()).build();
+            rentTransaction.setStatus(statusUpdate.getStatus());
             rentTransaction.setUpdated_at(now);
             rentTransactionRepository.saveAndFlush(rentTransaction);
+
+            if (rentTransaction.getStatus() == RentTransactionStatus.COMPLETED) {
+                Car selectCar = carService.findById(rentTransaction.getCar_id().getCarId());
+                CarStatusUpdate selectStatus = CarStatusUpdate.builder()
+                        .status(CarStatus.AVAILABLE)
+                        .build();
+                carService.updateStatus(selectCar.getCarId(), selectStatus);
+            }
             return toResponse(rentTransaction);
         }
-        if (rentTransaction.getStatus() == RentTransactionStatus.COMPLETED) {
-            Car selectCar = carService.findById(rentTransaction.getCar_id().getCarId());
-            CarStatusUpdate selectStatus = CarStatusUpdate.builder()
-                    .status(CarStatus.AVAILABLE)
-                    .build();
-            carService.updateStatus(selectCar.getCarId(), selectStatus);
-        }
-
         return null;
+    }
+
+    @Override
+    public RentTransaction getOne(String id) {
+        return rentTransactionRepository.findById(id).orElse(null);
     }
 }

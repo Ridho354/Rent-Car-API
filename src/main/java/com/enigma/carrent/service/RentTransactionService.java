@@ -5,6 +5,7 @@ import java.util.List;
 import com.enigma.carrent.dto.request.RentStatusUpdate;
 import com.enigma.carrent.dto.request.RentTransactionRequest;
 import com.enigma.carrent.dto.response.RentTransactionResponse;
+import com.enigma.carrent.entity.RentTransaction;
 
 public interface RentTransactionService {
     RentTransactionResponse addRentTransaction(RentTransactionRequest rentTransactionRequest);
@@ -13,4 +14,6 @@ public interface RentTransactionService {
     RentTransactionResponse findRentTransactionById(String id);
     List<RentTransactionResponse> findAllRentTransactions();
     RentTransactionResponse updateStatus(String id, RentStatusUpdate rentStatusUpdate);
+    RentTransaction getOne(String orderId);
+    // void updateStatus(String id, String status);
 }

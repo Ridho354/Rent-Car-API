@@ -1,7 +1,6 @@
 package com.enigma.carrent.dto.response;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import com.enigma.carrent.constant.RentTransactionStatus;
 
@@ -20,8 +19,8 @@ public class RentTransactionResponse {
     private String id;
     private String nik;
     private String carId;
-    private Date rentalStartDate;
-    private Date rentalEndDate;
+    private LocalDate rentalStartDate;
+    private LocalDate rentalEndDate;
     private Long totalPrice;
     private RentTransactionStatus status;
     private LocalDate createdAt;

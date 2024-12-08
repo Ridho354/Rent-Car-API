@@ -21,11 +21,14 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarResponse addCar(CarRequest carRequest) {
+        System.out.println("x".repeat(50));
+        System.out.println(carRequest.getPrice());
         Car car = new Car();
         car.setLisensePlate(carRequest.getLisensePlate());
         car.setName(carRequest.getName());
         car.setBrand(carRequest.getBrand());
         car.setModel(carRequest.getModel());
+        car.setPrice(carRequest.getPrice());
         car.setStatus(CarStatus.AVAILABLE);
         carRepository.saveAndFlush(car);
         return toResponse(car);
@@ -50,6 +53,7 @@ public class CarServiceImpl implements CarService {
             car.setName(carRequest.getName());
             car.setBrand(carRequest.getBrand());
             car.setModel(carRequest.getModel());
+            car.setPrice(carRequest.getPrice());
             carRepository.saveAndFlush(car);
             return toResponse(car);
         }
