@@ -8,6 +8,7 @@ import com.enigma.carrent.service.CustomerService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,23 +29,29 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @PostMapping
     public CustomerResponse addCustomer(@RequestBody CustomerRequest request) {
         return customerService.addCustomer(request);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping
     public List<Customer> findAll() {
         return customerService.findAll();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @GetMapping("/{id}")
-    public Customer findById(@PathVariable String id) {
-        return customerService.findById(id);
+    public CustomerResponse findCustomerById(@PathVariable String id) {
+        System.out.println(" ==== findCustomerById ====");
+        return customerService.findCustomerById(id);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     @PutMapping("/{id}")
     public CustomerResponse updateCustomer(@PathVariable String id, @RequestBody CustomerRequest request) {
+        System.out.println(" ==== updateCustomer ====");
         return customerService.updateCustomer(id, request);
     }
 

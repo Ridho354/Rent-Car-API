@@ -66,6 +66,25 @@
 			<version>2.7.0</version>
 		</dependency>
 
+		<!-- #SPRING SECURITY# 01 tambah dependency dasar spring security (spring-boot-starter-security)  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+		<!-- #SPRING SECURITY# 02 tambah dependency jwt (parser dsb) contoh java-jwt atau jjwt-api dkk  -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -9,4 +9,5 @@ public class Constant {
     public static final String API_CUSTOMER = "api/rentcar/customer";
     public static final String API_CAR = "api/rentcar/car";
     public static final String API_RENT_TRANSACTION = "api/rentcar/rent-transaction";
+    public static final String API_AUTH = "api/rentcar/auth";
 }

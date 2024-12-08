@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.enigma.carrent.dto.request.CustomerRequest;
+import com.enigma.carrent.dto.request.CustomerRequestRegister;
 import com.enigma.carrent.dto.response.CustomerResponse;
 import com.enigma.carrent.entity.Customer;
 import com.enigma.carrent.repository.CustomerRepository;
@@ -22,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse addCustomer(CustomerRequest request) {
-        Customer customer = customerRepository.findById(null).orElse(null);
+        Customer customer = customerRepository.findById(request.getNik()).orElse(null);
         if (customer != null) {
             throw new IllegalArgumentException("Customer with NIK " + request.getNik() + " already exists.");
         }
@@ -44,8 +45,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findById(String id) {
-        Customer customer = customerRepository.findById(id).orElse(null);
+        Customer customer = customerRepository.findByNik(id).orElse(null);
         return customer;
+    }
+
+    @Override
+    public CustomerResponse findCustomerById(String id) {
+        System.out.println("x".repeat(50));
+        Customer customer = customerRepository.findByNik(id).orElse(null);
+        return toResponse(customer);
     }
 
     @Override
@@ -54,11 +62,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerResponse updateCustomer(String id, CustomerRequest request) {
-        Customer customer = customerRepository.findById(id).orElse(null);
+        System.out.println("@".repeat(50));
+        Customer customer = customerRepository.findByNik(id).orElse(null);
         if (!customer.getNik().equals(request.getNik())) {
             throw new IllegalArgumentException("Cannot Change NIK");
         }
-
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer with NIK " + id + " not found.");
+        }
         if (customer != null) {
             customer.setNik(request.getNik());
             customer.setName(request.getName());
@@ -69,6 +80,22 @@ public class CustomerServiceImpl implements CustomerService {
             return toResponse(customer);
         }
         throw new IllegalArgumentException("Customer with NIK " + id + " not found.");
+    }
+
+    public void createCustomer(CustomerRequestRegister customerRequestRegister) {
+        Customer customer = customerRepository.findById(customerRequestRegister.getNik()).orElse(null);
+        if (customer != null) {
+            throw new IllegalArgumentException("Customer with NIK " + customerRequestRegister.getNik() + " already exists.");
+        }
+        Customer newCustomer = Customer.builder()
+                .nik(customerRequestRegister.getNik())
+                .name(customerRequestRegister.getName())
+                .driving_license(customerRequestRegister.getDriving_license())
+                .phone(customerRequestRegister.getPhone())
+                .address(customerRequestRegister.getAddress())
+                .userAccount(customerRequestRegister.getUserAccount())
+                .build();
+        customerRepository.saveAndFlush(newCustomer);
     }
 
     public CustomerResponse toResponse(Customer customer) {
