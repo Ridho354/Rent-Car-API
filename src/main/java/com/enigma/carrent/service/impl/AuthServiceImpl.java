@@ -1,7 +1,6 @@
 package com.enigma.carrent.service.impl;
 
 import com.enigma.carrent.dto.request.AuthRequest;
-import com.enigma.carrent.dto.request.CustomerRequest;
 import com.enigma.carrent.dto.request.CustomerRequestRegister;
 import com.enigma.carrent.dto.request.RegisterCustomerRequest;
 import com.enigma.carrent.dto.response.LoginResponse;

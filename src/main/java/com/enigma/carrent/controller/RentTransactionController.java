@@ -17,7 +17,6 @@ import java.util.List;
 public class RentTransactionController {
     private final RentTransactionService rentTransactionService;
 
-    @Autowired
     public RentTransactionController(RentTransactionService rentTransactionService) {
         this.rentTransactionService = rentTransactionService;
     }

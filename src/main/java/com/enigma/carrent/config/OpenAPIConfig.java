@@ -10,8 +10,8 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @Configuration
 @OpenAPIDefinition(info = @Info(
-    title = "Live Code Car Rental",
-    version = "1.0"
+    title = "Rent Car API",
+    version = "2.0"
     ), security = @SecurityRequirement(name = "bearer Authentication")
 )
 @SecurityScheme(name = "bearer Authentication",

@@ -22,9 +22,7 @@ import com.enigma.carrent.dto.response.PaymentResponse;
 import com.enigma.carrent.entity.Car;
 import com.enigma.carrent.entity.Payment;
 import com.enigma.carrent.entity.RentTransaction;
-import com.enigma.carrent.repository.CarRepository;
 import com.enigma.carrent.repository.PaymentRepository;
-import com.enigma.carrent.repository.RentTransactionRepository;
 import com.enigma.carrent.service.PaymentService;
 import com.enigma.carrent.service.RentTransactionService;
 

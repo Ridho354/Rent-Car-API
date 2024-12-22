@@ -1,7 +1,5 @@
 package com.enigma.carrent.constant;
 
-import com.enigma.carrent.entity.Car;
-
 public enum CarStatus {
    AVAILABLE("Tersedia"),
    RENTED("Dalam Rental"),
